@@ -1,7 +1,24 @@
+$background-color: #666666;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
 body {
-  background-color: red;
+  background-color: $background-color;
 }
 
 canvas {
-  background-color: blue;
+  display: none;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  border-radius: 4px;
+  box-shadow: 0px 2px 4px black;
 }

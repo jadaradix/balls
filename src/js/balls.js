@@ -24,6 +24,7 @@ const balls = (options) => {
   canvas.height = arena.height;
   canvas.style.height = arena.height.toString() + "px";
   canvas.style.backgroundColor = arena.colour;
+  canvas.style.display = "block";
 
   // when the canvas is clicked on, create a ball object
   canvas.addEventListener("click", (event) => {
