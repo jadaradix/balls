@@ -13,8 +13,8 @@ const Ball = function Ball (x, y, colour, width, height, vx, vy) {
   // this is better than just foo || 48 because 0 is falsey, meaning only non-0 values for foo would work correctly
   this.width = parseInt(width) || 16;
   this.height = parseInt(height) || 16;
-  this.vx = parseInt(vx) || (Math.random() * 1);
-  this.vy = parseInt(vy) || (Math.random() * 1);
+  this.vx = parseInt(vx) || (Math.random() * 5);
+  this.vy = parseInt(vy) || (Math.random() * -5);
   // allow method chaining
   return this;
 };

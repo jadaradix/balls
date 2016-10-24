@@ -1,5 +1,8 @@
 "use strict";
 
+const gravity = 0.1;
+const velocityReductionFactor = 0.8;
+
 const Arena = require("./types/Arena");
 const Ball = require("./types/Ball");
 
@@ -41,9 +44,24 @@ const balls = (options) => {
       canvasContext.arc(ball.x, ball.y, ball.width, 0, 2 * Math.PI, false);
       canvasContext.fillStyle = ball.colour;
       canvasContext.fill();
+      ball.vy += gravity;
+      ball.x += ball.vx;
+      ball.y += ball.vy;
+      if (ball.y > arena.height - (ball.height / 2)) {
+        ball.y = arena.height - (ball.height / 2);
+        ball.vy *= -velocityReductionFactor;
+      }
+      if (ball.x < 0 + (ball.width / 2)) {
+        ball.x = 0 + (ball.width / 2);
+        ball.vx = -ball.vx;
+      }
+      if (ball.x > arena.width - (ball.width / 2)) {
+        ball.x = arena.width - (ball.width / 2);
+        ball.vx = -ball.vx;
+      }
     });
 
-  }, 100);
+  }, 25);
 
 
 };
