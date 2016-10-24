@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <!-- priority order: Encoding - browser only inspects 1024 bytes to find this -->
+    <meta charset="UTF-8">
+    <!-- priority order: JavaScript - doesn't block parsing due to async attribute -->
+    <script src="dist/index.js" async></script>
+    <!-- priority order: CSS - doesn't block parsing, but does block rendering -->
+    <link rel="stylesheet" href="dist/index.js">
+    <!-- priority order: <title> - doesn't block parsing or rendering, but might depend on <meta charset="UTF-8"> -->
+    <title>Balls</title>
+  </head>
+
+  <body>
+
+
+    <canvas id="balls">
+      <h1>Hey</h1>
+      <p>
+        Your browser doesn't support the &lt;canvas&gt; tag.
+      </p>
+    </canvas>
+
+
+  </body>
+
+</html>
