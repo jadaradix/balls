@@ -66,6 +66,7 @@ const balls = (options) => {
 
   }, 25);
 
+  return arena;
 
 };
 

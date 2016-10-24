@@ -15,7 +15,7 @@ window.addEventListener(
   "load",
   () => {
     try {
-      return balls(options);
+      const arena = balls(options);
     } catch (error) {
       return console.error(error.message);
     }
