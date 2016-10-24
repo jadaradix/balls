@@ -20,16 +20,16 @@ Arena.prototype.reset = function reset () {
 
 Arena.prototype.addBall = function addBall (ball) {
   // quick and dirty way to avoid non-Balls ending up in this.balls array
-  if (typeof ball !== "Ball") {
-    throw new Error("'ball' argument provided to addBall() isn't a Ball type");
-  }
+  // if (typeof ball !== "Ball") {
+  //   throw new Error("'ball' argument provided to addBall() isn't a Ball type");
+  // }
   this.balls.push(ball);
   // allow method chaining
   return ball;
 };
 
 // override default toString method which is undescriptive
-Ball.prototype.toString = function () {
+Arena.prototype.toString = function () {
   return `Arena (width: ${this.width}, height: ${this.height})`;
 };
 

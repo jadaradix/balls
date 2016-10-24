@@ -1,8 +1,9 @@
 "use strict";
 
-const balls = (options) => {
+const Arena = require("./types/Arena");
+const Ball = require("./types/Ball");
 
-  console.log(options);
+const balls = (options) => {
 
   // options.canvasId: <canvas> element ID
   if (!options.hasOwnProperty("canvasId")) {
@@ -12,6 +13,7 @@ const balls = (options) => {
   if (!canvas) {
     throw new Error(`Element with ID '${options.canvasId}' was not found`);
   }
+  const canvasContext = canvas.getContext("2d");
 
   // arena
   const arena = new Arena(options.arena.colour, options.arena.width, options.arena.height);
@@ -21,21 +23,29 @@ const balls = (options) => {
   canvas.style.width = arena.width.toString() + "px";
   canvas.height = arena.height;
   canvas.style.height = arena.height.toString() + "px";
+  canvas.style.backgroundColor = arena.colour;
 
   // when the canvas is clicked on, create a ball object
-  canvas.addEventListener("click", (element, event) => {
-    console.log(element);
-    console.log(event);
+  canvas.addEventListener("click", (event) => {
     arena.addBall(
-      new Ball(100, 100)
+      new Ball(event.offsetX, event.offsetY)
     );
   });
 
-  // draw arena to canvas
-  arena.balls.forEach((ball) => {
-    // ...
-  });
+  setInterval(() => {
+
+    // draw arena to canvas
+    canvasContext.clearRect(0, 0, arena.width, arena.height);
+    arena.balls.forEach((ball) => {
+      canvasContext.beginPath();
+      canvasContext.arc(ball.x, ball.y, ball.width, 0, 2 * Math.PI, false);
+      canvasContext.fillStyle = ball.colour;
+      canvasContext.fill();
+    });
+
+  }, 100);
+
 
 };
 
-module.export = balls;
+module.exports = balls;

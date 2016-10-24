@@ -1,0 +1,99 @@
+//
+// JavaScript
+//
+
+const javaScriptInputDirectory = "src/js/**";
+const javaScriptInput = "src/js/index.js";
+const javaScriptOutput = "dist/index.js";
+
+const uglifyFiles = ((javaScriptOutput) => {
+  let o = {};
+  o[javaScriptOutput] = javaScriptOutput;
+  return o;
+})(javaScriptOutput);
+
+//
+// Sass
+//
+
+const sassInputDirectory = "src/sass/**";
+const sassInput = "src/sass/index.scss";
+const sassOutput = "dist/index.css";
+
+const sassFiles = ((sassInput, sassOutput) => {
+  let o = {};
+  o[sassOutput] = sassInput;
+  return o;
+})(sassInput, sassOutput);
+
+const transform = [
+  ["babelify",
+    {
+      "presets": ["es2015"]
+    }
+  ]
+];
+
+//
+// Grunt
+//
+
+module.exports = function (grunt) {
+
+  grunt.loadNpmTasks("grunt-browserify");
+  grunt.loadNpmTasks("grunt-contrib-uglify");
+  grunt.loadNpmTasks("grunt-sass");
+  grunt.loadNpmTasks("grunt-contrib-watch");
+
+  grunt.initConfig({
+
+    pkg: grunt.file.readJSON("package.json"),
+
+    browserify: {
+      once: {
+        src: javaScriptInput,
+        dest: javaScriptOutput,
+        options: {
+          transform: transform
+        }
+      }
+    },
+
+    uglify: {
+      options: {
+        mangle: false
+      },
+      once: {
+        files: uglifyFiles
+      }
+    },
+
+    sass: {
+      once: {
+        options: {
+          sourceMap: true
+        },
+        files: sassFiles
+      }
+    },
+
+    watch: {
+      javascript: {
+        files: [javaScriptInputDirectory],
+        tasks: ["browserify:once"]
+      },
+      sass: {
+        files: [sassInputDirectory],
+        tasks: ["sass:once"]
+      }
+    }
+
+  });
+
+  grunt.registerTask("default", [
+    "browserify:once",
+    "uglify:once",
+    "sass:once"
+  ]);
+
+};
