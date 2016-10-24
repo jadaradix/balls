@@ -1,7 +1,8 @@
 "use strict";
 
 const gravity = 0.1;
-const velocityReductionFactor = 0.8;
+const impactFactor = 0.8;
+const airFactor = 0.001;
 
 const Arena = require("./types/Arena");
 const Ball = require("./types/Ball");
@@ -45,11 +46,17 @@ const balls = (options) => {
       canvasContext.fillStyle = ball.colour;
       canvasContext.fill();
       ball.vy += gravity;
+      if (ball.vx > 0) {
+        ball.vx -= airFactor;
+      }
+      if (ball.vx < 0) {
+        ball.vx += airFactor;
+      }
       ball.x += ball.vx;
       ball.y += ball.vy;
       if (ball.y > arena.height - (ball.height / 2)) {
         ball.y = arena.height - (ball.height / 2);
-        ball.vy *= -velocityReductionFactor;
+        ball.vy *= -impactFactor;
       }
       if (ball.x < 0 + (ball.width / 2)) {
         ball.x = 0 + (ball.width / 2);
