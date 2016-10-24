@@ -1,9 +1,5 @@
 "use strict";
 
-const gravity = 0.1;
-const impactFactor = 0.8;
-const airFactor = 0.001;
-
 const Arena = require("./types/Arena");
 const Ball = require("./types/Ball");
 
@@ -42,21 +38,21 @@ const balls = (options) => {
     canvasContext.clearRect(0, 0, arena.width, arena.height);
     arena.balls.forEach((ball) => {
       canvasContext.beginPath();
-      canvasContext.arc(ball.x, ball.y, ball.width, 0, 2 * Math.PI, false);
+      canvasContext.arc(ball.x, ball.y, ball.width / 2, 0, 2 * Math.PI, false);
       canvasContext.fillStyle = ball.colour;
       canvasContext.fill();
-      ball.vy += gravity;
+      ball.vy += arena.gravity;
       if (ball.vx > 0) {
-        ball.vx -= airFactor;
+        ball.vx -= arena.airResistance;
       }
       if (ball.vx < 0) {
-        ball.vx += airFactor;
+        ball.vx += arena.airResistance;
       }
       ball.x += ball.vx;
       ball.y += ball.vy;
       if (ball.y > arena.height - (ball.height / 2)) {
         ball.y = arena.height - (ball.height / 2);
-        ball.vy *= -impactFactor;
+        ball.vy *= -arena.surfaceFriction;
       }
       if (ball.x < 0 + (ball.width / 2)) {
         ball.x = 0 + (ball.width / 2);
