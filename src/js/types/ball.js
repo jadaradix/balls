@@ -27,6 +27,7 @@ Ball.prototype.toString = function () {
 };
 
 // execute every frame
+// basic physics from http://physicscodes.com/bouncing-ball-simulation-in-javascript-on-html5-canvas/
 Ball.prototype.step = function (arena) {
   this.x += this.vx;
   this.y += this.vy;
