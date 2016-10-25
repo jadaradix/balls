@@ -26,4 +26,41 @@ Ball.prototype.toString = function () {
   return `Ball (x: ${this.x}, y: ${this.y})`;
 };
 
+// execute every frame
+Ball.prototype.step = function (arena) {
+  this.x += this.vx;
+  this.y += this.vy;
+  this.vy += arena.gravity;
+  if (this.vx > 0) {
+    this.vx -= arena.airResistance;
+  }
+  if (this.vx < 0) {
+    this.vx += arena.airResistance;
+  }
+  if (this.y > arena.height - (this.height / 2)) {
+    this.y = arena.height - (this.height / 2);
+    this.vy *= -arena.surfaceFriction;
+  }
+  if (this.x < 0 + (this.width / 2)) {
+    this.x = 0 + (this.width / 2);
+    this.vx = -this.vx;
+  }
+  if (this.x > arena.width - (this.width / 2)) {
+    this.x = arena.width - (this.width / 2);
+    this.vx = -this.vx;
+  }
+  // allow method chaining
+  return this;
+};
+
+// draw every frame
+Ball.prototype.draw = function (canvasContext) {
+  canvasContext.beginPath();
+  canvasContext.arc(this.x, this.y, this.width / 2, 0, 2 * Math.PI, false);
+  canvasContext.fillStyle = this.colour;
+  canvasContext.fill();
+  // allow method chaining
+  return this;
+};
+
 module.exports = Ball;

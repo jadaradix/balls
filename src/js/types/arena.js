@@ -38,4 +38,17 @@ Arena.prototype.toString = function () {
   return `Arena (width: ${this.width}, height: ${this.height})`;
 };
 
+// execute every frame
+Arena.prototype.step = function () {
+  // allow method chaining
+  return this;
+};
+
+// draw every frame
+Arena.prototype.draw = function (canvasContext) {
+  canvasContext.clearRect(0, 0, this.width, this.height);
+  // allow method chaining
+  return this;
+};
+
 module.exports = Arena;

@@ -35,34 +35,12 @@ const balls = (options) => {
 
   setInterval(() => {
 
-    // draw arena to canvas
-    canvasContext.clearRect(0, 0, arena.width, arena.height);
+    // step and draw
+    arena.step();
+    arena.draw(canvasContext);
     arena.balls.forEach((ball) => {
-      canvasContext.beginPath();
-      canvasContext.arc(ball.x, ball.y, ball.width / 2, 0, 2 * Math.PI, false);
-      canvasContext.fillStyle = ball.colour;
-      canvasContext.fill();
-      ball.vy += arena.gravity;
-      if (ball.vx > 0) {
-        ball.vx -= arena.airResistance;
-      }
-      if (ball.vx < 0) {
-        ball.vx += arena.airResistance;
-      }
-      ball.x += ball.vx;
-      ball.y += ball.vy;
-      if (ball.y > arena.height - (ball.height / 2)) {
-        ball.y = arena.height - (ball.height / 2);
-        ball.vy *= -arena.surfaceFriction;
-      }
-      if (ball.x < 0 + (ball.width / 2)) {
-        ball.x = 0 + (ball.width / 2);
-        ball.vx = -ball.vx;
-      }
-      if (ball.x > arena.width - (ball.width / 2)) {
-        ball.x = arena.width - (ball.width / 2);
-        ball.vx = -ball.vx;
-      }
+      ball.step(arena);
+      ball.draw(canvasContext);
     });
 
   }, 25);
