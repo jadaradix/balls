@@ -33,17 +33,18 @@ const balls = (options) => {
     );
   });
 
-  setInterval(() => {
-
-    // step and draw
+  // step and draw
+  // example from https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
+  const eachFrame = () => {
     arena.step();
     arena.draw(canvasContext);
     arena.balls.forEach((ball) => {
       ball.step(arena);
       ball.draw(canvasContext);
     });
-
-  }, 25);
+    requestAnimationFrame(eachFrame);
+  };
+  requestAnimationFrame(eachFrame);
 
   return arena;
 
