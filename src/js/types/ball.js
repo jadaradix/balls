@@ -31,20 +31,24 @@ Ball.prototype.step = function (arena) {
   this.x += this.vx;
   this.y += this.vy;
   this.vy += arena.gravity;
+  // air resistance needs to be applied in the right direction
   if (this.vx > 0) {
     this.vx -= arena.airResistance;
   }
   if (this.vx < 0) {
     this.vx += arena.airResistance;
   }
+  // don't let it fall off the bottom of the arena and make it bounce
   if (this.y > arena.height - (this.height / 2)) {
     this.y = arena.height - (this.height / 2);
     this.vy *= -arena.surfaceFriction;
   }
+  // make it bounce on the left side
   if (this.x < 0 + (this.width / 2)) {
     this.x = 0 + (this.width / 2);
     this.vx = -this.vx;
   }
+  // make it bounce on the right side
   if (this.x > arena.width - (this.width / 2)) {
     this.x = arena.width - (this.width / 2);
     this.vx = -this.vx;
@@ -56,6 +60,7 @@ Ball.prototype.step = function (arena) {
 // draw every frame
 Ball.prototype.draw = function (canvasContext) {
   canvasContext.beginPath();
+  // this.width / 2 because arc takes a radius argument
   canvasContext.arc(this.x, this.y, this.width / 2, 0, 2 * Math.PI, false);
   canvasContext.fillStyle = this.colour;
   canvasContext.fill();
