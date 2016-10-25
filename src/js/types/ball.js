@@ -42,7 +42,12 @@ Ball.prototype.step = function (arena) {
   // don't let it fall off the bottom of the arena and make it bounce
   if (this.y > arena.height - (this.height / 2)) {
     this.y = arena.height - (this.height / 2);
-    this.vy *= -arena.surfaceFriction;
+    // if it's stopped moving horizontally, stop bouncing
+    // this feels like a hack but it's late
+    // 0.01 is a nice 'error margin' as the vx will never be 0
+    if (Math.abs(this.vx) > 0.01 ) {
+      this.vy *= -arena.surfaceFriction;
+    }
   }
   // make it bounce on the left side
   if (this.x < 0 + (this.width / 2)) {
