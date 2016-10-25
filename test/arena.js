@@ -1,10 +1,11 @@
 "use strict";
-
 const chai = require("chai");
 const expect = chai.expect;
 
+
 const Arena = require("../src/js/types/arena.js");
 const Ball = require("../src/js/types/ball.js");
+
 
 describe("An empty arena", () => {
 
@@ -33,24 +34,6 @@ describe("An arena with 3 calls to addBall", () => {
 
   it("has 3 balls", (done) => {
     expect(arena.balls).to.have.length(3);
-    return done();
-  });
-
-});
-
-
-describe("A ball", () => {
-
-  const ball = new Ball();
-
-  it("has a colour", (done) => {
-    expect(ball).to.have.property("colour");
-    return done();
-  });
-
-  it("has x and y properties which are numbers", (done) => {
-    expect(ball.x).to.be.a("number");
-    expect(ball.y).to.be.a("number");
     return done();
   });
 
