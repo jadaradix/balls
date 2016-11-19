@@ -18,11 +18,9 @@ const sassInputDirectory = "src/sass/**";
 const sassInput = "src/sass/index.scss";
 const sassOutput = "dist/index.css";
 
-const sassFiles = ((sassInput, sassOutput) => {
-  let o = {};
-  o[sassOutput] = sassInput;
-  return o;
-})(sassInput, sassOutput);
+const sassFiles = {
+  [sassOutput]: sassInput
+};
 
 const transform = [
   ["babelify",
