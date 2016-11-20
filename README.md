@@ -4,6 +4,8 @@ balls makes Mondays happy, Fridays jealous and Sundays last forever.
 
 Presented via HTML5 `<canvas>`. Tested with Mocha and Chai.
 
+Demo: http://jada.io/static/balls/index.html
+
 
 ## Prerequisites
 
