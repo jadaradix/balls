@@ -4,14 +4,19 @@ balls makes Mondays happy, Fridays jealous and Sundays last forever.
 
 Presented via HTML5 `<canvas>`. Tested with Mocha and Chai.
 
-Demo: http://jada.io/static/balls/index.html
+
+## Demo
+
+http://jadaradix.com/balls/
+
+Click anywhere to create a ball.
 
 
 ## Prerequisites
 
 ### (Optional) yarn
 
-yarn is a superior package manager to npm, working as a replacement for the usual npm CLI.
+yarn is a replacement package manager for npm.
 
 ```
 npm install -g yarn
@@ -32,7 +37,7 @@ npm install -g grunt-cli
 yarn
 ```
 
-If you don't want to run `yarn` you can run `npm install` instead.
+If you don't want to run `yarn` you can run `npm install`.
 
 
 ## Build
